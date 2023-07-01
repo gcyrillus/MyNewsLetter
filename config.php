@@ -65,7 +65,7 @@
 		}
 		$plxPlugin->setParam('content_intro'  , $_POST['content_intro']  , 'cdata');
 		$plxPlugin->setParam('content_mention', $_POST['content_mention'], 'cdata');
-		$plxPlugin->setParam('content_footer ', $_POST['content_footer'] , 'cdata');
+		$plxPlugin->setParam('content_footer', $_POST['content_footer'] , 'cdata');
 		
 		
 		
