@@ -1,0 +1,24 @@
+.newsform {
+  background: hotpink linear-gradient(to top right, transparent ,#fff8,transparent);
+  padding: 0.1em 1em;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 1px 1px 5px;
+  width: max-content;
+  max-width: 90%;
+  margin:1em auto;
+}
+.newsform div.newsL p {
+  display: flex;
+  text-align: center;
+}
+.msg p::first-letter {
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-left: 1em;
+  display: inline-block;
+  color: hotpink;
+  font-size: 1.5em;
+  line-height: .25em;
+  vertical-align: -.15em;
+}
