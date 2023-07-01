@@ -1,6 +1,8 @@
 # MyNewsLetter
 systeme automatisé de newsletter pour pluxml - sans pistage - adresse mails cryptées
 
+Un sujet sur le forum de PluXml est ouvert pour les discussions : https://forum.pluxml.org/discussion/7475/plugin-mynewsletter-systeme-de-newsletter-automatise-ou-non-adresse-mails-cryptees
+
 <h1>Aide et description du Plugin</h1>
 <div id="plxmnl">
 	<h2>Pr&eacute;ambule</h2>
