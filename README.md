@@ -34,6 +34,8 @@ Un sujet sur le forum de PluXml est ouvert pour les discussions : https://forum.
 	</ol>
 	<p>Ces quelques informations restent &agrave; votre libre interpr&eacute;tation.</p>
 	<h2>Fonctionnement et caract&eacute;ristiques</h2>
+	<h3>Mailing</h3>
+	<p><b>Une nouvelle publication dans la périodicité choisi doit exister pour rendre possible l'envoi d'une newsletter.</b></p>
 	<h3>Caract&eacute;ristiques</h3>
 	<ul style="list-style-type: square;">
 		<li style="font-weight: bold;"><strong>compatible &agrave; partir de php7</strong></li>
