@@ -30,7 +30,7 @@ Un sujet sur le forum de PluXml est ouvert pour les discussions : https://forum.
 		<li>Nombre d'abonn&eacute;s</li>
 		<li>Nombre d'abonnement valid&eacute;</li>
 		<li>Nombre de d&eacute;sabonnement</li>
-		<li>Nombre d'abonnement obsol&eacuteve;tes effac&eacute;s par le script</li>
+		<li>Nombre d'abonnement obsol&eacute;tes effac&eacute;s par le script</li>
 		<li>Nombre de nouvelle envoy&eacute;e</li>
 		<li>Nombre de lien retour depuis une nouvelle</li>
 	</ol>
