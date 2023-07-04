@@ -8,9 +8,10 @@ Un sujet sur le forum de PluXml est ouvert pour les discussions : https://forum.
 	<h2>Pr&eacute;ambule</h2>
 	<p>Ce plugin gratuit , construit sur la fonction <code>mail()</code> de PHP, ne requiert aucun service tiers pour fonctionner.</p>
 	<p>Les adresses mails r&eacute;colt&eacute;es pour les abonnements sont <strong>sous votre seul responsabilit&eacute;</strong>, crypt&eacute;es et stock&eacute;es dans le r&eacute;pertoire du plugin. (supprimer le plugin supprime &eacute;galement tous les abonnement de fa&ccedil;on irr&eacute;versible).</p>
-	<p>Les adresses mails crypt&eacute;es ne sont compatible qu'avec votre installation du plugin. elles sont illisibles et inutilisables sur une autre installation du plugin ou tout autre outil.</p>
+	<p>Les adresses mails crypt&eacute;es ne sont compatibles qu'avec votre installation du plugin. elles sont illisibles et inutilisables sur une autre installation du plugin ou tout autre outil.</p>
 	<p><strong>Il n'y a pas de decrypteur fourni avec le plugin pour les rendre lisibles</strong>, <u>il n'est pas pr&eacute;vu de pouvoir les partager</u> avec un tiers ou un autre plugin.</p>
 	<p>Ce plugin d&eacute;pend de la fonction <code>mail()</code> de votre h&eacute;bergement, si celle-ci est inop&eacute;rante ou n&eacute;cessite une configuration particuli&egrave;re, cela ne d&eacute;pend pas du plugin. Dans ce cas, il faut s'adresser &agrave; votre h&eacute;bergeur pour l'activer ou suivre les consignes de configurations de celui-ci. Si ni l'un ni l'autre ne fonctionnent, il faudra vous tourner vers un service ext&eacute;rieur si une newsletter est un besoin imp&eacute;ratif pour votre site, et ce, quelque soit le CMS utilis&eacute;.</p>
+	<p>Le plugin n'est pas destiné à faire de la prospection ni de develloppé un plan de marketing. Son usage est d'informé vos abonnés des nouvelles publications sur la période que vous choissisez.</p>
 	<h3>RGPD</h3>
 	<p>Ce plugin gratuit reduit au minimum les informations personnelles et crypte celle-ci pour eviter toute divulgation malencontreuses.</p>
 	<p><strong>Seule, l'adresse mail est <em>r&eacute;colt&eacute;e</em> et crypt&eacute;e</strong> Elle est n&eacute;cessaire pour envoyer un courriel!, aucune autre information personnelle pouvant identifier d'une maniere quelconque un abonn&eacute; est enregistr&eacute;e.</p>
@@ -36,6 +37,7 @@ Un sujet sur le forum de PluXml est ouvert pour les discussions : https://forum.
 	<h2>Fonctionnement et caract&eacute;ristiques</h2>
 	<h3>Mailing</h3>
 	<p><b>Une nouvelle publication dans la périodicité choisi doit exister pour rendre possible l'envoi d'une newsletter.</b></p>
+	<p>Une seule newsLetter peut-être envoyé à un abonné pour la période configurée.</p>
 	<h3>Caract&eacute;ristiques</h3>
 	<ul style="list-style-type: square;">
 		<li style="font-weight: bold;"><strong>compatible &agrave; partir de php7</strong></li>
