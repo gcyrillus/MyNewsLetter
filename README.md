@@ -56,8 +56,8 @@ Un sujet sur le forum de PluXml est ouvert pour les discussions : https://forum.
 		</li>
 		<li>Les envois de mail se font par lots(configurable) et son d&eacute;clench&eacute; par vos visiteurs ... (selon configuration).</li>
 		<li>Les jours et heures d'envoi des news est aussi configurable.</li>
-		<li>Le contenu&nbsp; est configurable et il est possible d'envoyer une news sans qu'il y ai forc&eacute;ment de nouvelles publications.</li>
-		<li>Il n'est pas possible d'envoyer &agrave; un abonner plusieurs news sur un m&ecirc;me mois.</li>
+		<li>Le contenu&nbsp; est configurable et il n'est pas possible d'envoyer une news sans qu'il y ai de nouvelles publications.</li>
+		<li>Il n'est pas possible d'envoyer &agrave; un abonner plusieurs news sur un m&ecirc;me mois/période.</li>
 		<li>La newsletter est construite avec des tableau HTML a partir de plusieurs fichiers <em>template</em>, dans l'esprit PluXml. Il n'y a actuellement pas de th&egrave;mes propos&eacute;s autre que le template de base. L&rsquo;&eacute;diteur vous permet cependant de r&eacute;&eacute;crire et modifier la Newsletter g&eacute;n&eacute;r&eacute;e.
 			<p>&nbsp;</p>
 		</li>
