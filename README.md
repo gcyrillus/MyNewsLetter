@@ -54,16 +54,16 @@ Un sujet sur le forum de PluXml est ouvert pour les discussions : https://forum.
 				<li>sans forc&eacute;ment partager les derni&egrave;res publications, vous pouvez r&eacute;diger votre newsletter &agrave; votre convenance.</li>
 			</ul>
 		</li>
-		<li>Les envois de mail se font par lots(configurable) et son d&eacute;clench&eacute; par vos visiteurs ... (selon configuration).</li>
-		<li>Les jours et heures d'envoi des news est aussi configurable.</li>
+		<li>Les envois de mail se font par lots(configurable) et sont d&eacute;clench&eacute; par vos visiteurs ... (selon configuration).</li>
+		<li>Les jours et heures d'envois des news est aussi configurable.</li>
 		<li>Le contenu&nbsp; est configurable et il n'est pas possible d'envoyer une news sans qu'il y ai de nouvelles publications.</li>
-		<li>Il n'est pas possible d'envoyer &agrave; un abonner plusieurs news sur un m&ecirc;me mois/période.</li>
-		<li>La newsletter est construite avec des tableau HTML a partir de plusieurs fichiers <em>template</em>, dans l'esprit PluXml. Il n'y a actuellement pas de th&egrave;mes propos&eacute;s autre que le template de base. L&rsquo;&eacute;diteur vous permet cependant de r&eacute;&eacute;crire et modifier la Newsletter g&eacute;n&eacute;r&eacute;e.
+		<li>Il n'est pas possible d'envoyer &agrave; un abonn&eacute; plusieurs news sur un m&ecirc;me mois/période.</li>
+		<li>La newsletter est construite avec des tableaux HTML a partir de plusieurs fichiers <em>template</em>, dans l'esprit PluXml. Il n'y a actuellement pas de th&egrave;mes propos&eacute;s autre que le template de base. L&rsquo;&eacute;diteur vous permet cependant de r&eacute;&eacute;crire et modifier la Newsletter g&eacute;n&eacute;r&eacute;e.
 			<p>&nbsp;</p>
 		</li>
 	</ul>
 	<h3>Fonctionnement</h3>
-	<p>Les mails de confirmation ou de demande de confirmation des abonnements sont automatique</p>
+	<p>Les mails de confirmation ou de demande de confirmation des abonnements sont automatiques.</p>
 	<p>Un mail non valid&eacute; de plus de 6 mois est effac&eacute; automatiquement au moment de l'envoi des news.Le fichier d&rsquo;abonnement se nettoie seul.</p>
 	<p>Ce sont vos visiteurs qui d&eacute;clenchent les envois de mail par lots. L'envoi des lots est limit&eacute; &agrave; une minute d'intervalle. La configuration par d&eacute;faut est de "un" envoi par lot.</p>
 	<p>&nbsp;</p>
