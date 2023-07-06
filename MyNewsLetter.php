@@ -2,19 +2,20 @@
 	/**
 		* Plugin 	MyNewsLetter
 		* @author	Cyrille G.
+		* 01/07/2023
 	**/
 	class MyNewsLetter extends plxPlugin {
-		
-		private $url = ''; # parametre de l'url pour accèder à la page de recherche
-		public $lang = '';
-		public 	$subscriptions ;
-		public $revoque;
-		public $from = 'no-reply';
-		public $newsTpl;
-		public $bodyNews;
-		public $newsDate;
-		public $cats;
-		public $lots ='1';
+		# quelques variables utile au script
+		private $url = ''; 			# parametre de l'url pour accèder à la page de recherche
+		public $lang = ''; 			# langue de PluXml
+		public $subscriptions ; 	# la clé de cryptage!
+		public $revoque; 			# valeur pour effacer un abonement
+		public $from = 'no-reply'; 	# defaut - emmission n'attendant pas de reponse en retour
+		public $newsTpl; 			# template de la nes
+		public $bodyNews; 			# corps de la news
+		public $newsDate; 			# date du mois de la news
+		public $cats; 				# les categories du site
+		public $lots ='1'; 			# quantité par lot - valeur d'initialisation par défaut
 		
 		
 		
@@ -25,8 +26,7 @@
 			* @return	stdio
 			* @author	Stephane F
 		**/
-		public function __construct($default_lang) {
-			
+		public function __construct($default_lang) {			
 			# gestion du multilingue plxMyMultiLingue natif
 			$this->lang='';
 			if(defined('PLX_MYMULTILINGUE')) {
@@ -55,19 +55,24 @@
 			$this->addHook('AdminTopEndHead', 'AdminTopEndHead');
 			$this->addHook('AdminTopBottom', 'AdminTopBottom');
 			$this->addHook('plxAdminHtaccess', 'plxAdminHtaccess');		
-			$this->addHook('Index','Index');
-			$this->addHook('plxShowConstruct', 'plxShowConstruct');
-			$this->addHook('plxMotorPreChauffageBegin', 'plxMotorPreChauffageBegin');
-			$this->addHook('plxShowStaticListEnd', 'plxShowStaticListEnd');
-			$this->addHook('plxShowPageTitle', 'plxShowPageTitle');
-			$this->addHook('plxMotorDemarrageNewCommentaire','plxMotorDemarrageNewCommentaire');
-			$this->addHook('SitemapStatics', 'SitemapStatics');
-			$this->addHook('MyNewsLetterForm', 'form');
-			$this->addHook('IndexEnd','IndexEnd');	
 			
+			# Si le fichier de langue existe on peut mettre en place la partie visiteur
+			if(file_exists(PLX_PLUGINS.$this->plug['name'].'/lang/'.$default_lang.'.php')) {
+				$this->addHook('Index','Index');
+				$this->addHook('plxShowConstruct', 'plxShowConstruct');
+				$this->addHook('plxMotorPreChauffageBegin', 'plxMotorPreChauffageBegin');
+				$this->addHook('plxShowStaticListEnd', 'plxShowStaticListEnd');
+				$this->addHook('plxShowPageTitle', 'plxShowPageTitle');
+				$this->addHook('plxMotorDemarrageNewCommentaire','plxMotorDemarrageNewCommentaire');
+				$this->addHook('SitemapStatics', 'SitemapStatics');
+				$this->addHook('MyNewsLetterForm', 'form');
+				$this->addHook('IndexEnd','IndexEnd');
+				$this->addHook('ThemeEndHead', 'ThemeEndHead');		
+			}			
 		}
 		
 		/**
+			echo '<p id="subscribeME"><style>#subscribeME {padding:0;margin:0 0 3em;white-space:nowrap;display:flex;}label[for="id_rep"] {margin-top:2em;margin-bottom:-4em;}</style><label for="newsme">'.$this->getLang('L_SUBSCRIBE_OPTION').'</label><input type="checkbox" name="newsme"></p>';
 			* Méthode qui mets à jour le fichier .htaccess du site pour prendre en charge $_GET dans le traitement du formulaire
 			*
 			* @return	stdio
@@ -75,8 +80,7 @@
 		**/
 		public function plxAdminHtaccess() {
 			echo '<?php	$htaccess = str_replace("[L]", "[QSA,L]", $htaccess); ?>';
-		}
-		
+		}		
 		
 		/**
 			* Méthode qui charge le code css et le javascript  nécessaire à la gestion de onglet dans l'administration
@@ -125,9 +129,15 @@
 			echo "<?php ".$string." ?>";
 		}
 		
-		# code à exécuter à l’activation du plugin 
-		# creer une variable aleatoire pour le dossier et fichier de stockage des abonnements.
-		# @author G.Cyrille
+		/**
+			* code à exécuter à l’activation du plugin 
+			*
+			* creer une clé de cryptage si inexistante
+			* creer les dossiers et fichiers manquants utiles au bon fonctionnementt script
+			* deplace certains dossier et fichiers vers le dossier médias.
+			*
+			*@author G.Cyrille
+		*/
 		public function OnActivate() { 
 			# verifie la presence du fichier d'initialisation
 			$initFile=PLX_PLUGINS.basename(__DIR__).'/activated.php';
@@ -171,7 +181,9 @@
 		
 		/**
 			* methode de traitement abonnement depuis formulaire de commentaire
+			*
 			* verifie la validité du mail avant enregistrement
+			*
 			* @author G.Cyrille			
 		*/
 		public function Index() {
@@ -201,6 +213,10 @@
 			";
 			
 			echo "<?php ".$string." ?>";
+			
+			/*	
+				* @author G.Cyrille			
+			*/			
 			# recup retour newsletter.
 			if(isset($_GET['news'])) $this->record('visit');	
 			
@@ -251,11 +267,7 @@
 		**/
 		public function plxMotorDemarrageNewCommentaire(){
 			$_SESSION['msgSubscription'] ='';
-			if(isset($_POST['newsme']) AND $this->checkEmail(trim($_POST['mail']))) {
-				$_SESSION['msgSubscription'] = $this->getLang('L_SUBSCRIPTION_REGISTERED');
-				}else {
-				unset($_POST['newsme']);unset($_SESSION['msgSubscription']);
-			}
+			if(isset($_POST['newsme']) AND $this->checkEmail(trim($_POST['mail']))) {$_SESSION['msgSubscription'] = $this->getLang('L_SUBSCRIPTION_REGISTERED');}
 		}
 		
 		/**
@@ -293,6 +305,9 @@
 			$method = $plxPlugin->getParam('method') == 'get' ? $_GET : $_POST;
 			$frmMethod = $plxPlugin->getParam('method') == 'get' ? 'get' : 'post';
 			
+			/*	
+				* @author G.Cyrille			
+			*/			
 			if(!empty($method['courriel'])) {
 				$courriel = plxUtils::strCheck(plxUtils::unSlash($method['courriel']));
 			}
@@ -321,13 +336,24 @@
 		<?php
 		}
 		
+		/** 
+			*
+			* Méthode d'ajout des <link rel="alternate"... sur les pages des plugins qui gèrent le multilingue
+			*
+			* @return	stdio
+			* @author	WorldBot
+			* 
+		**/
+		public function ThemeEndHead() {			
+			
+		}
 		
 		/**
-			* Squatte le formulaire de commentaire
-			* ajoute case à cocher pour s'abonner à la newsletter
+			* Squatte le formulaire de commentaire 
 			*
-			* appele le fichier comment.js
-			* affiche la case via javascript à la volée si mail valide
+			* insere une case à cocher cachée
+			* charge le javascript qui verifie la validité d'un mail
+			* et montre la case à cocher pour s'abonner à la newsletter
 			*
 			* @author G.Cyrille
 		**/
@@ -406,7 +432,7 @@
 						$cancel   = $plxMotor->urlRewrite('?'.$this->getParam('url').'&stopNewsLetter='.$revoque);
 						$body	  = sprintf($this->getLang('L_SUBSCRIPTION_AUTO'), $email, $subcs, $cancel ,$plxMotor->aUsers['001']['name'], $plxMotor->aConf['title']);
 						
-						$this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from, $email, 'Confirmation de votre abonnement à la newsLetter' , $body, $contentType="html", $cc=false, $bcc=false);
+						$this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from, $email, $this->getLang('L_CONFIRM_OR_IGNORE') , $body, $contentType="html", $cc=false, $bcc=false);
 						$recap = sprintf($this->getLang('L_SUBSCRIPTION_ACTIVE'), $subcs, $email , $frequence, $cancel);
 						if($recap) echo $recap;
 					}
@@ -418,12 +444,12 @@
 			}
 			endIt:  // si pas de datas
 		}
-		
-		/* verifie le format d'une adresse mail
-			* Verification via les fonctions de PHP
+
+		/**
+			* verifie le format d'une adresse mail
 			*
 			* @author	Cyrille G.
-		*/
+		**/	
 		public function checkEmail($email) {
 			if(filter_var($email, FILTER_VALIDATE_EMAIL)){
 				return true;
@@ -447,13 +473,12 @@
 			$cancel   = $plxMotor->urlRewrite('?'.$this->getParam('url').'&stopNewsLetter='.$revoque);
 			$body = sprintf($this->getLang('L_SUBSCRIPTION_VALIDATE'),  $email , $frequence ,  $validate , $cancel , $plxMotor->aUsers['001']['name'], $plxMotor->aConf['title']);
 			# envoi d'un courriel  // note: voir pour test ou faire usage de phpMailer
-			$this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from , $email, 'Validez votre abonnement à la newsLetter ou ignorez ce message' , $body, $contentType="html", $cc=false, $bcc=false);
+			$this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from , $email, $this->getLang('L_CONFIRM_OR_IGNORE')  , $body, $contentType="html", $cc=false, $bcc=false);
 			#affichage message 
-			echo sprintf($this->getLang('L_SUBSCRIPTION_PENDING'), $frequence, $email , $cancel);
-			
-			
+			echo sprintf($this->getLang('L_SUBSCRIPTION_PENDING'), $frequence, $email , $cancel);			
 		}
-		/**
+
+/**
 			* Méthode qui valide un abonné au  fichier json
 			*
 			* @author	Cyrille G.
@@ -576,8 +601,12 @@
 		}
 		
 		/**
-			* Tests en entonnoir avant de validé l'envoi des news:
+			* methode entonnoir qui determine l'envoi d'une news
 			*
+			* break; ,  continue; et sauvegarde ?  
+			*
+			* SI, et dans l'ordre:
+			  ====================
 			* délai d'une minute entre chaque test
 			* Y-a t-il des abonnés
 			* Est ce une plage d'envoi
@@ -585,17 +614,21 @@
 			* reste t-il des abonnés elligible à l'envoi d'une NewsLetter
 			* configuration manuel ou automatique
 			* As t-on prevenu le webmestre
-			* envoi automatique ou envoi validé, on envoi et on compte
-			* Mise à jour du fichier abonnés.
+			* envoi automatique ou envoi validé
+			*
+			* Alors:
+			  ======
+			* envoi 
+			* comptage
+			* Et mise à jour du fichier abonnés.
 			*
 			* @author Cyrille G.
 			*
 		**/
-		public function isItTime() {
-			
+		public function isItTime() {		
 			
 			if(strtotime('-1 minutes') > filemtime(PLX_ROOT.'plugins/'.__CLASS__.'/'.$this->subscriptions.'/'.$this->subscriptions.'.ip.json')) {		
-				# reinitialisation
+				# reinitialisation à une minute
 				file_put_contents(PLX_ROOT.'plugins/'.__CLASS__.'/'.$this->subscriptions.'/'.$this->subscriptions.'.ip.json', '[]' ); // pas de traitements ni stockage autre que la date de modif du fichier
 				
 				# recupe abonnements
@@ -628,7 +661,8 @@
 						$refDate=date_format($refDate, 'YmdHi');
 						# appel a la class plxMotor
 						$plxMotor = plxMotor::getInstance();
-						# on se cale sur la date du dernier article					
+						# on se cale sur la date du dernier article		
+						ksort($plxMotor->plxGlob_arts->aFiles);
 						$dateArt =$plxMotor->artInfoFromFilename(end($plxMotor->plxGlob_arts->aFiles))['artDate'];
 						# l'article est-il considéré comme nouveau?
 						if($dateArt > $refDate) {
@@ -696,12 +730,12 @@
 										}
 									}
 									
-								}
-								
+								}								
 								
 							}
 							# maj du fichier abonnés si au moins un mail a été envoyé
-							if($mailsSent>0) file_put_contents(PLX_ROOT.'plugins/'.__CLASS__.'/'.$this->subscriptions.'/'.$this->subscriptions.'.json', json_encode($datasSubscriptions,true) );										
+							if($mailsSent>0) file_put_contents(PLX_ROOT.'plugins/'.__CLASS__.'/'.$this->subscriptions.'/'.$this->subscriptions.'.json', json_encode($datasSubscriptions,true) );
+							# enregistre date dernier envoi									
 						}
 						
 					}
@@ -750,19 +784,20 @@
 			
 			# envoi 
 			$email = str_replace($this->subscriptions, '',base64_decode( $subscribed['email']));
-			if($this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from , $email, $this->getParam('object') , $body, $contentType="html", $cc=false, $bcc=false) != true	) {
+			if($this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from , $email, $this->getParam('object') , $body, $contentType="html", $cc=false, $bcc=false) == true	) {
 				#incrementation le nombre de news envoyées 
-				//$mailsSent++;		
-				# incremente les stats 
 				$this->record('sent');
-				# ajout aux archives
+				# ajout aux archives?
 				if(!file_exists(PLX_PLUGINS.basename(__DIR__).'/SentNews/'.$newest_file)) { copy(PLX_PLUGINS.basename(__DIR__).'/ListNews/'.$newest_file, PLX_PLUGINS.basename(__DIR__).'/SentNews/'.$newest_file);}
 			}
 			
 			
 		}
-		
-		# verifie le format d'une date
+		/**
+			* methode qui verifie le format d'une date
+			* 
+			* @author Cyrille G.
+		**/		
 		public function isValidDate($date, $format = 'm-Y'){
 			$dt = DateTime::createFromFormat($format, $date);
 			return $dt && $dt->format($format) === $date;
@@ -790,7 +825,7 @@
 					return $dateString;
 				}
 			}
-			else {
+			else { // version PHP obsolete ou sans la class IntlDateFormatter
 				if($this->default_lang !='en' && file_exists(PLX_PLUGINS.basename(__DIR__).'/lang/'.$this->default_lang.'.php')) {
 					$MonthToTranslate = array('Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sept','Oct',' Nov','Dec') ;
 					$index=0;					
@@ -858,8 +893,7 @@
 			*
 			* @author Cyrille G.
 		**/
-		public function buildMail($do='') {
-			
+		public function buildMail($do='') {			
 			$plxMotor = plxMotor::getInstance();
 			$sort = $this->getParam('elements');
 			$sort=explode(',',$sort);
@@ -892,8 +926,6 @@
 		
 		/**
 			* fait une copie de l'image au format png
-			*
-			* @author Cyrille G.
 		**/
 		public function saveToPng($filename) {
 			$fileInfo = pathinfo($filename);
@@ -905,24 +937,23 @@
 		}
 		
 		/** 
-			* verifie si il y a au moins une News generée et la crée par défaut
-			*
-			* @author Cyrille G.
+			* scan le repertoire des news genérées
+			* option=option : affiche des boite option
+			* !option		: affiche un tableau javascript
 			
 		**/
 		public function scanListNews() {
 			if( !file_exists(PLX_PLUGINS.basename(__DIR__).'/ListNews/')) mkdir(PLX_PLUGINS.basename(__DIR__).'/ListNews/');
-			$files = scandir(PLX_PLUGINS.basename(__DIR__).'/ListNews/', SCANDIR_SORT_DESCENDING);				
-			if(count(array_diff($files, array('..', '.'))) == 0) {
-				$this->buildMail($this->getParam('frequency'));
+			$files = scandir(PLX_PLUGINS.basename(__DIR__).'/ListNews/', SCANDIR_SORT_DESCENDING);
+			
+			if($files == 0) {
+				$this->buildMail('do');
 			}
 		}
 		/** 
 			* scan le repertoire des news envoyées
 			* option=option : affiche des boite option
 			* !option		: affiche un tableau javascript
-			*
-			* @author Cyrille G.
 			
 		**/
 		public function scanNewsSent($option='') {
@@ -943,8 +974,6 @@
 		}			
 		/**
 			* Extraction des liens des catégories actives
-			*
-			* @author Cyrille G.
 		**/
 		public function catListLinks() {
 			global $plxAdmin;
@@ -961,8 +990,6 @@
 		
 		/**
 			* verifie l'existence d'une News du mois en cours
-			*
-			* @author Cyrille G.
 			*
 		**/
 		public function checkListNews() {
