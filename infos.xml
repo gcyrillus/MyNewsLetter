@@ -2,7 +2,7 @@
 <document>
 	<title><![CDATA[MyNewsLetter]]></title>
 	<author><![CDATA[Cyrille G.]]></author>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<date>01/07/2023</date>
 	<site>http://pluxopolis.net</site>
 	<description><![CDATA[Systeme de NewsLetter interne automatisable pour PluXml]]></description>
