@@ -1,8 +1,8 @@
 <?php
 	/**
-		* Plugin 	MyNewsLetter
+		* Plugin 	MyNewsLetter  Version compatible PHP 5.x (hebergeement Free),7.x,8.x
 		* @author	Cyrille G.
-		* 01/07/2023
+		* 07/07/2023
 	**/
 	class MyNewsLetter extends plxPlugin {
 		# quelques variables utile au script
@@ -143,7 +143,18 @@
 			$initFile=PLX_PLUGINS.basename(__DIR__).'/activated.php';
 			if(!file_exists($initFile)) {
 				#création d'un nom de repertoire aléatoire
-				$subscriptionDir=bin2hex(random_bytes('16'));// php7 au minimum!!!!
+				$lengthKey = 4;
+				if (version_compare(PHP_VERSION, '7.0.0', '<')) {
+				$subscriptionDir='';
+					for ($i = 1; $i <= $lengthKey; $i++) {
+						$bytes = openssl_random_pseudo_bytes($i, $cstrong);
+						$hex   = bin2hex($bytes);
+						$subscriptionDir .= $hex;
+					}	
+				}
+				else {
+					$subscriptionDir=bin2hex(random_bytes('16'));// php7 au minimum!!!!				
+				}
 				#création du contenu du fichier d'initialisation
 				$file_content='<?php if(!defined(\'PLX_ROOT\')) exit;'.PHP_EOL.'$this->subscriptions =\''.$subscriptionDir.'\';';
 				#ecriture du fichier
@@ -392,7 +403,18 @@
 					$date=date("m-Y"); 					
 					$lastSent=$date;
 					# valeur lien de désabonnement
-					$revoque= bin2hex(random_bytes('16'));
+					$revoqueLength= 4;;
+					if (version_compare(PHP_VERSION, '7.0.0', '<')) {
+					$revoque='';
+					for ($i = 1; $i <= $revoqueLength; $i++) {
+						$bytes = openssl_random_pseudo_bytes($i, $cstrong);
+						$hex   = bin2hex($bytes);
+						$revoque .= $hex;
+					}	
+				}
+				else {
+					$revoque=bin2hex(random_bytes('16'));// php7 au minimum!!!!				
+				}
 					# etat validation abonnement
 					if(!isset($method['valid'])) {$valid='0';} else {$valid='1';}
 					# datas
@@ -780,7 +802,7 @@
 			$body = str_replace('###STOP###', ' <a href="'.$plxMotor->urlRewrite( '?NewsLetter&stopNewsLetter='.$subscribed['revoque']).'">'.$this->getLang('L_STOP').'</a> ', $body);
 			
 			# insertion des liens catégories si il y a
-			$body = str_replace('###CATEGORIE###', $this->catListLinks()  ?? '', $body);
+			$body = str_replace('###CATEGORIE###', $this->catListLinks()  , $body);
 			
 			# envoi 
 			$email = str_replace($this->subscriptions, '',base64_decode( $subscribed['email']));
@@ -920,7 +942,7 @@
 			# on créer la liste des catégories active (affichage optionnel dans la news)
 			$this->catListLinks();
 			# insertion des liens catégories optionnel
-			$this->newsTpl = str_replace('###CATEGORIE###', $this->cats  ?? '', $this->newsTpl);   // $output ?
+			$this->newsTpl = str_replace('###CATEGORIE###', $this->cats  , $this->newsTpl);   // $output ?
 			$this->newsTpl .=file_get_contents($dirTpl.'bodyBottomTpl.php');			
 		}
 		
