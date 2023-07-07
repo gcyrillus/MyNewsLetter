@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-	<title><![CDATA[MyNewsLetter]]></title>
+	<title><![CDATA[MyNewsLetter PHP5,7,8]]></title>
 	<author><![CDATA[Cyrille G.]]></author>
-	<version>1.0.1</version>
-	<date>01/07/2023</date>
+	<version>1.x.2</version>
+	<date>07/07/2023</date>
 	<site>http://pluxopolis.net</site>
 	<description><![CDATA[Systeme de NewsLetter interne automatisable pour PluXml]]></description>
 	<scope></scope>
