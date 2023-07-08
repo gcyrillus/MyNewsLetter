@@ -121,7 +121,7 @@
 					<dt><?php $plxPlugin->lang('L_FOOTER') ?></dt>
 					<dd><input type="checkbox" <?php if($plxPlugin->getParam('footer') ==1 ) echo 'checked="checked"';?> disabled></dd>
 					<dt><?php $plxPlugin->lang('L_AUTO_SENDING') ?></dt>
-					<dd><input type="checkbox" <?php if($plxPlugin->getParam('paramSend') !=2) echo 'checked="checked"';?>  disabled></dd>
+					<dd><input type="checkbox" <?php if($plxPlugin->getParam('paramSend') !=1) echo 'checked="checked"';?>  disabled></dd>
 				</dl>
 			</fieldset>
 		</div>
