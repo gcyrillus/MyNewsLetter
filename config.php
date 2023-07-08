@@ -31,7 +31,6 @@
 		$plxPlugin->setParam('hour1', $_POST['hour1'], 'numeric');
 		$plxPlugin->setParam('hour2', $_POST['hour2'], 'numeric');
 		$plxPlugin->setParam('paramSend', $_POST['paramSend'], 'numeric');
-		$plxPlugin->setParam('confirmSub', $_POST['confirmSub'], 'numeric');
 		$plxPlugin->setParam('from', $_POST['from'], 'string');
 		$plxPlugin->setParam('who', $_POST['who'], 'string');
 		$plxPlugin->setParam('object', $_POST['object'], 'string');
@@ -67,10 +66,7 @@
 		$plxPlugin->setParam('content_mention', $_POST['content_mention'], 'cdata');
 		$plxPlugin->setParam('content_footer', $_POST['content_footer'] , 'cdata');
 		
-		
-		
-		
-		
+
 		
 		$plxPlugin->saveParams();
 		if(is_file(PLX_ROOT.'.htaccess')) {
@@ -139,7 +135,6 @@
 	$var['hour2'] = $plxPlugin->getParam('hour1')					=='' ? '20'																				: $plxPlugin->getParam('hour2');
 	$var['paramSend'] = $plxPlugin->getParam('paramSend')			=='' ? '2'																				: $plxPlugin->getParam('paramSend');
 	$var['lots'] = $plxPlugin->getParam('lots')						=='' ? '5'																				: $plxPlugin->getParam('lots');
-	$var['confirmSub'] = $plxPlugin->getParam('confirmSub')			=='' ? '0'																				: $plxPlugin->getParam('confirmSub');
 	$var['from'] = $plxPlugin->getParam('from')						=='' ? $plxPlugin->get_domain() 														: $plxPlugin->getParam('from');
 	$var['who'] = $plxPlugin->getParam('who')						=='' ? $plxAdmin->aUsers['001']['name'] 												: $plxPlugin->getParam('who');
 	$var['object'] = $plxPlugin->getParam('object')					=='' ? '[La NewsLetter de '.$plxAdmin->aConf['title'].' du '. date('m-Y').']' 			: $plxPlugin->getParam('object');
@@ -291,13 +286,6 @@
 		
 		<div class="onglet" data-title="<?php $plxPlugin->lang('L_CONFIG_NEWS') ?>">
 			<h4><?php $plxPlugin->lang('L_CONFIG_NEWS') ?></h4>
-			<fieldset>
-				<legend><?php $plxPlugin->lang('L_ASK_CONFIRM') ?></legend>
-				<p>
-					<label for="id_mnuDisplay"><?php echo $plxPlugin->lang('L_REQUIRE_CONFIRM') ?>&nbsp;:</label>
-					<?php plxUtils::printSelect('confirmSub',array('1'=>L_YES,'0'=>L_NO),$var['confirmSub']); ?>
-				</p>	
-			</fieldset>
 			<fieldset>
 				<legend><?php $plxPlugin->lang('L_PARAM_AUTO') ?></legend>
 				<p>
