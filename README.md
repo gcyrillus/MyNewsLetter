@@ -41,7 +41,7 @@ Un sujet sur le forum de PluXml est ouvert pour les discussions : https://forum.
 	<p>Une seule newsLetter peut-être envoyé à un abonné pour la période configurée.</p>
 	<h3>Caract&eacute;ristiques</h3>
 	<ul style="list-style-type: square;">
-		<li style="font-weight: bold;"><strong>compatible &agrave; partir de php7</strong> <small>une autre branche avec version patché est dispo pour php5x/free</small></li>
+		<li style="font-weight: bold;"><strong>compatible &agrave; partir de php7</strong> <small>une autre branche avec version patché est dispo pour php5x/free https://github.com/gcyrillus/MyNewsLetter/tree/patch-include-PHP5-compatibility </small></li>
 		<li>Vos visiteurs peuvent s'abonner &agrave; la newsletter de votre site via un petit formulaire, depuis l'endroit de votre choix sur le site.</li>
 		<li>Si votre th&egrave;me utilise le formulaire de commentaires du th&egrave;me par d&eacute;faut, une case &agrave; cocher s'affiche sous le champ de l'email.</li>
 		<li>Les adresses mails sont crypt&eacute;es, la date d'inscription et d'envoi de la derni&egrave;re news sont associ&eacute;s &agrave; chaque abonnement.</li>
@@ -70,7 +70,7 @@ Un sujet sur le forum de PluXml est ouvert pour les discussions : https://forum.
 	<h2>Description</h2>
 	<p>Le plugin MyNewsLetter, comme son nom l'indique permet d'envoyer les actualit&eacute;s de votre site &agrave; vos abonn&eacute;s. De fa&ccedil;on automatique ou manuelle.</p>
 	<p>Quelques informations anonymes sont enregistr&eacute;s, comme le nombre d'abonnements ou retours sur envois.</p>
-	<p><strong>Une version de PHP7 au minimum est requise pour son fonctionnement.</strong><span style="font-size: 8pt;"> (Pour les h&eacute;bergements Free voir la branche patchée)</span><strong><br></strong></p>
+	<p><strong>Une version de PHP7 au minimum est requise pour son fonctionnement.</strong><span style="font-size: 8pt;"> (Pour les h&eacute;bergements Free voir la branche patchée https://github.com/gcyrillus/MyNewsLetter/tree/patch-include-PHP5-compatibility )</span><strong><br></strong></p>
 	<p>Les abonnements sont enregistr&eacute;s dans un r&eacute;pertoire et fichier au nom al&eacute;atoire cr&eacute;&eacute; &agrave; la premi&egrave;re activation, Les mails des abonn&eacute;s sont crypt&eacute;s.</p>
 	<p><strong>Chaque installation du plugin est unique et le fichier des abonn&eacute;s <u>ne sera pas compatible avec une autre installation</u>.</strong></p>
 	<h3>Cot&eacute; visiteurs</h3>
