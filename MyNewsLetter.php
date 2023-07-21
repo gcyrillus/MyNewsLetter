@@ -3,6 +3,9 @@
 		* Plugin 	MyNewsLetter
 		* @author	Cyrille G.
 		* 01/07/2023
+  		* LICENCE Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)  http://creativecommons.org/licenses/by-sa/4.0/ 
+    		* Ce(tte) œuvre est mise à disposition selon les termes de la http://creativecommons.org/licenses/by-sa/4.0/ Licence Creative Commons 
+      		* Attribution -  Partage dans les Mêmes Conditions 4.0 International 
 	**/
 	class MyNewsLetter extends plxPlugin {
 		# quelques variables utile au script
