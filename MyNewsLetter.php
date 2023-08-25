@@ -9,7 +9,7 @@
 	**/
 	class MyNewsLetter extends plxPlugin {
 		
-		private $url = ''; # parametre de l'url pour accèder à la page de recherche
+		private $url = ''; 
 		public $lang = '';
 		public 	$subscriptions ;
 		public $revoque;
