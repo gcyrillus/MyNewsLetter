@@ -103,11 +103,20 @@
 		header('Location: parametres_plugin.php?p=MyNewsLetter');
 		exit;
 	}
+
+
+	# On récupère les templates des pages statiques
+	$glob = plxGlob::getInstance(PLX_ROOT . $plxAdmin->aConf['racine_themes'] . $plxAdmin->aConf['style'], false, true, '#^^static(?:-[\w-]+)?\.php$#');
+	if (!empty($glob->aFiles)) {
+		$aTemplates = array();
+		foreach($glob->aFiles as $v)
+			$aTemplates[$v] = basename($v, '.php');
+	} else {
+		$aTemplates = array('' => L_NONE1);
+	}
 	
 	#as t-on une news à afficher ?
 	$plxPlugin->checkListNews();	
-	
-	
 	
 	
 	# initialisation des variables 
