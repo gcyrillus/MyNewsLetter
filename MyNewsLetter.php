@@ -395,7 +395,7 @@
 						# stats abonnement
 						$newSubscription= key($datasSubscriptions)+ 1;
 						# ajout abonnement
-						$datasSubscriptions[$newSubscription]= array('email'=> $mail , 'dateSub'=> $date, 'lastSent'=> $lastSent, 'revoque' => $revoque, 'valid'=> $valid , 'agent'=> $_SERVER ['HTTP_USER_AGENT'] , 'referent'=>   $_SERVER['HTTP_REFERER']  , 'ip'=>$_SERVER ['REMOTE_ADDR'] );
+						$datasSubscriptions[$newSubscription]= array('email'=> $mail , 'dateSub'=> $date, 'lastSent'=> $lastSent, 'revoque' => $revoque, 'valid'=> $valid );
 					}
 					else { // premier abonement
 						$datasSubscriptions[]= array('email'=> $mail , 'dateSub'=> $date, 'lastSent'=> $lastSent, 'revoque' => $revoque, 'valid'=> $valid);	
