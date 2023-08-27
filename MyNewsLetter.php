@@ -2,14 +2,11 @@
 	/**
 		* Plugin 	MyNewsLetter
 		* @author	Cyrille G.
-		* 01/07/2023
-  		* LICENCE Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)  http://creativecommons.org/licenses/by-sa/4.0/ 
-    		* Ce(tte) œuvre est mise à disposition selon les termes de la http://creativecommons.org/licenses/by-sa/4.0/ Licence Creative Commons 
-      		* Attribution -  Partage dans les Mêmes Conditions 4.0 International 
+		* https://github.com/gcyrillus/MyNewsLetter
 	**/
 	class MyNewsLetter extends plxPlugin {
 		
-		private $url = ''; 
+		private $url = ''; # parametre de l'url pour accèder à la page de recherche
 		public $lang = '';
 		public 	$subscriptions ;
 		public $revoque;
@@ -66,9 +63,11 @@
 			$this->addHook('plxShowPageTitle', 'plxShowPageTitle');
 			$this->addHook('plxMotorDemarrageNewCommentaire','plxMotorDemarrageNewCommentaire');
 			$this->addHook('SitemapStatics', 'SitemapStatics');
-			$this->addHook('MyNewsLetterForm', 'form');
-			$this->addHook('IndexBegin','IndexBegin');	
+			$this->addHook('MyNewsLetterForm', 'form');	
 			$this->addHook('IndexEnd','IndexEnd');	
+			
+			# comptabilise les liens depuis une newsletter
+			if(isset($_GET['news']) and $this->isValidDate($_GET['news'], $format = 'm-Y')) {$this->record('visit');}
 			
 		}
 		
@@ -323,14 +322,7 @@
 		
 		<?php
 		}
-		/**
-		
-		
-		**/
-		public function IndexBegin() {
-			# recup retour newsletter.
-			if(isset($_GET['news'])) {$this->record('visit');}
-		}	
+
 		
 		/**
 			* Squatte le formulaire de commentaire
@@ -386,7 +378,7 @@
 						$datasSubscriptions= array_values( array_column($datasSubscriptions, null, 'email') );
 						foreach($datasSubscriptions as $element) {
 							if($email == str_replace($this->subscriptions, '',base64_decode( $element['email']))) {
-								echo sprintf($this->getLang('L_SUBSCRIPTION_FOUND'), $this->getParam('from'),$plxMotor->aUsers['001']['name'],$plxMotor->aConf['title'] );
+								echo sprintf($this->getLang('L_SUBSCRIPTION_FOUND'), $this->getParam('from'),$plxMotor->aUsers['002']['name'],$plxMotor->aConf['title'] );
 								goto endIt;
 								break;
 							}
@@ -395,7 +387,7 @@
 						# stats abonnement
 						$newSubscription= key($datasSubscriptions)+ 1;
 						# ajout abonnement
-						$datasSubscriptions[$newSubscription]= array('email'=> $mail , 'dateSub'=> $date, 'lastSent'=> $lastSent, 'revoque' => $revoque, 'valid'=> $valid );
+						$datasSubscriptions[$newSubscription]= array('email'=> $mail , 'dateSub'=> $date, 'lastSent'=> $lastSent, 'revoque' => $revoque, 'valid'=> $valid , 'agent'=> $_SERVER ['HTTP_USER_AGENT'] , 'referent'=>   $_SERVER['HTTP_REFERER']  , 'ip'=>$_SERVER ['REMOTE_ADDR'] );
 					}
 					else { // premier abonement
 						$datasSubscriptions[]= array('email'=> $mail , 'dateSub'=> $date, 'lastSent'=> $lastSent, 'revoque' => $revoque, 'valid'=> $valid);	
@@ -414,9 +406,9 @@
 						$subcs = $this->getLang('L_NEWS_LETTER');
 						$validate = $plxMotor->urlRewrite('?'.$this->getParam('url').'&validNewsLetter='.$revoque);
 						$cancel   = $plxMotor->urlRewrite('?'.$this->getParam('url').'&stopNewsLetter='.$revoque);
-						$body	  = sprintf($this->getLang('L_SUBSCRIPTION_AUTO'), $email, $subcs, $cancel ,$plxMotor->aUsers['001']['name'], $plxMotor->aConf['title']);
+						$body	  = sprintf($this->getLang('L_SUBSCRIPTION_AUTO'), $email, $subcs, $cancel ,$plxMotor->aUsers['002']['name'], $plxMotor->aConf['title']);
 						
-						$this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from, $email, 'Confirmation de votre abonnement à la newsLetter' , $body, $contentType="html", $cc=false, $bcc=false);
+						$this->envoiCourriel($plxMotor->aUsers['002']['name'], $this->from, $email, 'Confirmation de votre abonnement à la newsLetter' , $body, $contentType="html", $cc=false, $bcc=false);
 						$recap = sprintf($this->getLang('L_SUBSCRIPTION_ACTIVE'), $subcs, $email ,  $cancel);
 						if($recap) echo $recap;
 					}
@@ -455,9 +447,9 @@
 			$plxMotor = plxMotor::getInstance();
 			$validate = $plxMotor->urlRewrite('?'.$this->getParam('url').'&validNewsLetter='.$revoque);
 			$cancel   = $plxMotor->urlRewrite('?'.$this->getParam('url').'&stopNewsLetter='.$revoque);
-			$body = sprintf($this->getLang('L_SUBSCRIPTION_VALIDATE'),  $email , $frequence ,  $validate , $cancel , $plxMotor->aUsers['001']['name'], $plxMotor->aConf['title']);
+			$body = sprintf($this->getLang('L_SUBSCRIPTION_VALIDATE'),  $email , $frequence ,  $validate , $cancel , $plxMotor->aUsers['002']['name'], $plxMotor->aConf['title']);
 			# envoi d'un courriel  // note: voir pour test ou faire usage de phpMailer
-			$this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from , $email, 'Validez votre abonnement à la newsLetter ou ignorez ce message' , $body, $contentType="html", $cc=false, $bcc=false);
+			$this->envoiCourriel($plxMotor->aUsers['002']['name'], $this->from , $email, 'Validez votre abonnement à la newsLetter ou ignorez ce message' , $body, $contentType="html", $cc=false, $bcc=false);
 			#affichage message 
 			echo sprintf($this->getLang('L_SUBSCRIPTION_PENDING'), $frequence, $email , $cancel);
 			
@@ -479,17 +471,17 @@
 					if( $value['revoque'] == $_GET['validNewsLetter']) {
 						$email = str_replace($this->subscriptions, '',base64_decode( $datasSubscriptions[$key]['email']));
 						if($value['valid'] == 1 ) {
-							echo sprintf($this->getLang('L_SUBSCRIPTION_VALIDATED'), $email, $plxMotor->aUsers['001']['name']);
+							echo sprintf($this->getLang('L_SUBSCRIPTION_VALIDATED'), $email, $plxMotor->aUsers['002']['name']);
 							$done=true;
 							break;
 						}
 						
 						$validate = $plxMotor->urlRewrite('?'.$this->getParam('url').'&validNewsLetter='.$datasSubscriptions[$key]['revoque']);
 						$cancel   = $plxMotor->urlRewrite('?'.$this->getParam('url').'&stopNewsLetter='.$datasSubscriptions[$key]['revoque']);
-						$body	  = sprintf($this->getLang('L_SUBSCRIPTION_AUTO'), $email, $cancel ,$plxMotor->aUsers['001']['name'], $plxMotor->aConf['title']);
+						$body	  = sprintf($this->getLang('L_SUBSCRIPTION_AUTO'), $email, $cancel ,$plxMotor->aUsers['002']['name'], $plxMotor->aConf['title']);
 						$datasSubscriptions[$key]['valid']='1';
 						file_put_contents(PLX_ROOT.'plugins/'.__CLASS__.'/'.$this->subscriptions.'/'.$this->subscriptions.'.json', json_encode($datasSubscriptions,true) );
-						echo '<blockquote cite="'.$plxMotor->aUsers['001']['name'].'">'.$body.'</blockquote>';
+						echo '<blockquote cite="'.$plxMotor->aUsers['002']['name'].'">'.$body.'</blockquote>';
 						$done=true;
 						break;
 					}
@@ -552,7 +544,7 @@
 					if( $value['revoque'] == $_GET['stopNewsLetter']) {
 						unset($datasSubscriptions[$key]);
 						file_put_contents(PLX_ROOT.'plugins/'.__CLASS__.'/'.$this->subscriptions.'/'.$this->subscriptions.'.json', json_encode($datasSubscriptions,true) );
-						echo '<blocquote class="msg"><div>'.$plxPlugin->getLang('L_UNSUBSCRIB').'<br><cite>'.$plxMotor->aUsers['001']['name'].'</cite></div></blockquote>';
+						echo '<blocquote class="msg"><div>'.$plxPlugin->getLang('L_UNSUBSCRIB').'<br><cite>'.$plxMotor->aUsers['002']['name'].'</cite></div></blockquote>';
 						$this->record('defec');
 						$done=true;
 					}
@@ -680,7 +672,7 @@
 									if(is_a($lastWarning, 'DateTime') AND $goSend != date('m-Y') ) { // paramSend à 1 , on previent le webmestre
 										if( $lastWarning->diff($dateCheck)->m != 0) { // déja prevenu ce mois-ci ?
 											# - envoi manuel = notif au webmestre 
-											$this->envoiCourriel('##- '.$plxMotor->aConf['title'].' -##', $plxMotor->aUsers['001']['email'], $plxMotor->aUsers['001']['email'], sprintf($this->getLang('L_THERE_IS_NEWS_TO_SEND'), $plxMotor->aConf['title']) , sprintf($this->getLang('L_THERE_IS_NEWS_TO_SEND'), $plxMotor->aConf['title']), $contentType="html", $cc=false, $bcc=false);
+											$this->envoiCourriel('##- '.$plxMotor->aConf['title'].' -##', $plxMotor->aUsers['002']['email'], $plxMotor->aUsers['002']['email'], sprintf($this->getLang('L_THERE_IS_NEWS_TO_SEND'), $plxMotor->aConf['title']) , sprintf($this->getLang('L_THERE_IS_NEWS_TO_SEND'), $plxMotor->aConf['title']), $contentType="html", $cc=false, $bcc=false);
 											# enregistrement de la date de notification
 											$this->setParam('warnWebmaster',date('01-m-Y'), 'string');
 											include(PLX_ROOT.'/core/lib/class.plx.msg.php');//include plxMsg 
@@ -761,7 +753,7 @@
 			
 			# envoi 
 			$email = str_replace($this->subscriptions, '',base64_decode( $subscribed['email']));
-			if($this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from , $email, $this->getParam('object') , $body, $contentType="html", $cc=false, $bcc=false) == true	) {
+			if($this->envoiCourriel($plxMotor->aUsers['002']['name'], $this->from , $email, $this->getParam('object') , $body, $contentType="html", $cc=false, $bcc=false) == true	) {
 				#incrementation le nombre de news envoyées 
 				//$mailsSent++;		
 				# incremente les stats 
@@ -869,7 +861,8 @@
 			*
 			* @author Cyrille G.
 		**/
-		public function buildMail($do='') {			
+		public function buildMail($do='') {
+			
 			$plxMotor = plxMotor::getInstance();
 			# pas d'URL rewriting pour les liens depuis la newsLetter !
 			$plxMotor->aConf["urlrewriting"]=0;	
