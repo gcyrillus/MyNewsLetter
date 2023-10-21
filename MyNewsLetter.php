@@ -378,7 +378,7 @@
 						$datasSubscriptions= array_values( array_column($datasSubscriptions, null, 'email') );
 						foreach($datasSubscriptions as $element) {
 							if($email == str_replace($this->subscriptions, '',base64_decode( $element['email']))) {
-								echo sprintf($this->getLang('L_SUBSCRIPTION_FOUND'), $this->getParam('from'),$plxMotor->aUsers['002']['name'],$plxMotor->aConf['title'] );
+								echo sprintf($this->getLang('L_SUBSCRIPTION_FOUND'), $this->getParam('from'),$plxMotor->aUsers['001']['name'],$plxMotor->aConf['title'] );
 								goto endIt;
 								break;
 							}
@@ -406,9 +406,9 @@
 						$subcs = $this->getLang('L_NEWS_LETTER');
 						$validate = $plxMotor->urlRewrite('?'.$this->getParam('url').'&validNewsLetter='.$revoque);
 						$cancel   = $plxMotor->urlRewrite('?'.$this->getParam('url').'&stopNewsLetter='.$revoque);
-						$body	  = sprintf($this->getLang('L_SUBSCRIPTION_AUTO'), $email, $subcs, $cancel ,$plxMotor->aUsers['002']['name'], $plxMotor->aConf['title']);
+						$body	  = sprintf($this->getLang('L_SUBSCRIPTION_AUTO'), $email, $subcs, $cancel ,$plxMotor->aUsers['001']['name'], $plxMotor->aConf['title']);
 						
-						$this->envoiCourriel($plxMotor->aUsers['002']['name'], $this->from, $email, 'Confirmation de votre abonnement à la newsLetter' , $body, $contentType="html", $cc=false, $bcc=false);
+						$this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from, $email, 'Confirmation de votre abonnement à la newsLetter' , $body, $contentType="html", $cc=false, $bcc=false);
 						$recap = sprintf($this->getLang('L_SUBSCRIPTION_ACTIVE'), $subcs, $email ,  $cancel);
 						if($recap) echo $recap;
 					}
