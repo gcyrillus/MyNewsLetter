@@ -126,7 +126,7 @@
 	<h2>Aide</h2>
 	<h3>Afficher le formulaire d'abonnement</h3>
 	<p>Le plugin dispose d'un hook que vous pouvez ins&eacute;rer dans votre th&egrave;me &agrave; l'endroit de votre choix.</p>
-	<p>Le hook &agrave; inserer est : <code>&lt;php eval($plxShow-&gt;callHook('MyNewsLetterForm','Abonnement news letter')) ?&gt;</code>.</p>
+	<p>Le hook &agrave; inserer est : <code>&lt;?php eval($plxShow-&gt;callHook('MyNewsLetterForm','Abonnement news letter')) ?&gt;</code>.</p>
 	<h3>Modifier le formulaire</h3>
 	<p>Il y a quelques options vous permettant d&rsquo;am&eacute;liorer le formulaire &agrave; partir de la page 'Configuration'.</p>
 	<h4>Donner un titre au formulaire</h4>
