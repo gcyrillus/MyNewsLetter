@@ -39,7 +39,14 @@
 					}
 				}
 			}	
-			
+
+
+			# polyfill from :  https://php.watch/versions/8.0/str_contains
+			if (!function_exists('str_contains')) {
+			    function str_contains(string $haystack, string $needle): bool {
+			        return '' === $needle || false !== strpos($haystack, $needle);
+			    }
+			}				
 			
 			# appel du constructeur de la classe plxPlugin (obligatoire)
 			parent::__construct($default_lang);
