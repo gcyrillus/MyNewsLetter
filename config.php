@@ -35,6 +35,7 @@
 		$plxPlugin->setParam('who', $_POST['who'], 'string');
 		$plxPlugin->setParam('object', $_POST['object'], 'string');
 		$plxPlugin->setParam('lots', $_POST['lots'], 'numeric');
+		$plxPlugin->setParam('formTitle', $_POST['formTitle'], 'cdata');
 		if(isset($_POST['mention'])) {
 			$plxPlugin->setParam('mention', 1 , 'numeric');
 			$showMention=1;
@@ -154,6 +155,7 @@
 	$var['content_intro']= $plxPlugin->getParam('content_intro')	=='' ? $plxPlugin->getLang('L_CONTENT_INTRO')					: $plxPlugin->getParam('content_intro');
 	$var['content_mention']= $plxPlugin->getParam('content_mention')=='' ? $plxPlugin->getLang('L_MENTIONS_HTML')					: $plxPlugin->getParam('content_mention');
 	$var['content_footer'] = $plxPlugin->getParam('content_footer')	=='' ? $plxPlugin->getLang('L_FOOTER_HTML') 					: $plxPlugin->getParam('content_footer');
+	$var['formTitle'] = $plxPlugin->getParam('formTitle')	=='' ? $plxPlugin->getLang('L_FORM_TITLE') 					: $plxPlugin->getParam('formTitle');
 	
 	
 	
@@ -218,6 +220,10 @@
 				<p>
 					<label for="id_frmDisplay"><?php echo $plxPlugin->lang('L_FORM_DISPLAY') ?>&nbsp;:</label>
 					<?php plxUtils::printSelect('frmDisplay',array('1'=>L_YES,'0'=>L_NO),$var['frmDisplay']); ?>
+				</p>
+				<p>
+					<label for="id_formTitle"><?php echo $plxPlugin->lang('L_TITLE_FORM') ?>&nbsp;:</label>
+					<?php plxUtils::printInput('formTitle',$var['formTitle'],'text','50-255') ?>
 				</p>
 				<p>
 					<label for="id_template"><?php $plxPlugin->lang('L_TEMPLATE') ?>&nbsp;:</label>
@@ -347,4 +353,3 @@
 	
 </script>
 <style>.tox-promotion{display:none}/* do not confuse and give funny idea to the user that would bring up an issue to the plugin using it*/</style>
-
