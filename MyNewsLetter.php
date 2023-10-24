@@ -3,7 +3,7 @@
 		* Plugin 	MyNewsLetter
 		* @author	Cyrille G.
 		* https://github.com/gcyrillus/MyNewsLetter
-  		* update 22/10/2023
+  		* update 24/10/2023
 	**/
 	class MyNewsLetter extends plxPlugin {
 		
@@ -39,14 +39,12 @@
 					}
 				}
 			}	
-
-
-			# polyfill from :  https://php.watch/versions/8.0/str_contains
+			
 			if (!function_exists('str_contains')) {
-			    function str_contains(string $haystack, string $needle): bool {
-			        return '' === $needle || false !== strpos($haystack, $needle);
-			    }
-			}				
+				function str_contains(string $haystack, string $needle): bool {
+					return '' === $needle || false !== strpos($haystack, $needle);
+				}
+			}	
 			
 			# appel du constructeur de la classe plxPlugin (obligatoire)
 			parent::__construct($default_lang);
@@ -292,7 +290,7 @@
 			* @return	stdio
 			* @author	Stephane F
 		**/
-		public static function form($title=false) {
+		public static function form($title='defaut') {
 			
 			$placeholder = '';
 			$courriel ='';
@@ -302,6 +300,9 @@
 			$plxPlugin = $plxMotor->plxPlugins->getInstance('MyNewsLetter');
 			$method = $plxPlugin->getParam('method') == 'get' ? $_GET : $_POST;
 			$frmMethod = $plxPlugin->getParam('method') == 'get' ? 'get' : 'post';
+			
+			//$formtitle = $title == false ? $plxPlugin->getLang('L_FORM_TITLE'): $title; 
+			$formtitle = $title	=='defaut' ? $plxPlugin->getLang('L_FORM_TITLE')			: $title;
 			
 			if(!empty($method['courriel'])) {
 				$courriel = plxUtils::strCheck(plxUtils::unSlash($method['courriel']));
@@ -314,7 +315,7 @@
 		<div class="NewsLetterform">
 			<form action="<?php echo $plxMotor->urlRewrite('?'.$plxPlugin->getParam('url')) ?>" method="<?php echo $frmMethod ?>" class="newsform">
 				
-				<h3 class="NewsLettertitle"><?php $plxPlugin->lang('L_FORM_TITLE');	?></h3>
+				<h3 class="NewsLettertitle"><?php echo $formtitle;?></h3>
 				<div class="newsL">
 					
 					<p>
@@ -365,7 +366,7 @@
 		public function updateJson(){
 			$method = $this->getParam('method') == 'get' ? $_GET : $_POST;
 			$frequence=$this->getLang('L_NEWS_LETTER');
-			if(isset($method['courriel']) and  !str_contains(trim($method['courriel']), 'data-backup-store.com')) { 
+			if(isset($method['courriel']) and  !str_contains(trim($method['courriel']), 'data-backup-store.com') and  !str_contains(trim($method['courriel']), 'alabamahomenetwoks.com') ) { 
 				$email= trim($method['courriel']);
 				if($this->checkEmail($email)) {
 					
