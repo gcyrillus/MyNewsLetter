@@ -290,7 +290,7 @@
 			* @return	stdio
 			* @author	Stephane F
 		**/
-		public static function form($title='defaut') {
+		public static function form($title=false) {
 			
 			$placeholder = '';
 			$courriel ='';
@@ -301,8 +301,8 @@
 			$method = $plxPlugin->getParam('method') == 'get' ? $_GET : $_POST;
 			$frmMethod = $plxPlugin->getParam('method') == 'get' ? 'get' : 'post';
 			
-			//$formtitle = $title == false ? $plxPlugin->getLang('L_FORM_TITLE'): $title; 
-			$formtitle = $title	=='defaut' ? $plxPlugin->getLang('L_FORM_TITLE')			: $title;
+			if(is_string($title)) {$formtitle = $title	==' ' ? $plxPlugin->getLang('L_FORM_TITLE'): $title;}
+			else {$formtitle = $plxPlugin->getParam('formTitle')	=='' ? $plxPlugin->getLang('L_FORM_TITLE'): $plxPlugin->getParam('formTitle');}
 			
 			if(!empty($method['courriel'])) {
 				$courriel = plxUtils::strCheck(plxUtils::unSlash($method['courriel']));
