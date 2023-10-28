@@ -96,9 +96,27 @@ window.onload=function() {
         xhr.send();
     }
     
-    let addOne = document.querySelector("#courriel");
+    let addOne = document.querySelector("#courriel");    
     let actionAdd = document.querySelector("#add");
     let getRow = document.querySelector("#suscribers tbody");
+    
+    // ne pas soumettre le formulaire depuis input text/#courriel
+    addOne.addEventListener("keypress", logKey);  
+    
+    function logKey(e) {
+        if(e.code === 'NumpadEnter' ||  e.code === 'Enter') {  
+            e.preventDefault();
+            let addit = addOne.value;
+            addSubscriber(addit, getRow);
+            return false;
+            
+        }
+        
+    }
+    
+    
+    
+    
     actionAdd.addEventListener("click", function () {
         let addit = addOne.value;
         addSubscriber(addit, getRow);
@@ -119,11 +137,11 @@ window.onload=function() {
                 if (xhr.status === 200 && xhr.responseText.includes('<b>'+addit) === true ) {
                     getRow.insertAdjacentHTML(
                         "beforeend",
-                        '<tr class="alert green"><th>' +
+                        "<tr class='alert green'><th>" +
                         addit +
-                        "</th><td> 1 </td><td>" +
+                        "</th><td>"+ L_YES +"</td><td>" +
                         TODAY +
-                        "</td><td>01-2023</td><td>1</td><td></td>"+ L_NONE1 +"<td>NEW</td></tr> \n"
+                        "</td><td>01-2023</td><td>1</td><td>"+ L_NONE1 +"</td><td><b class='red'>"+ L_NEW +"</b></td></tr> \n"
                     );
                     } else {
                     alert(L_RETRY_VALID_MAIL);
