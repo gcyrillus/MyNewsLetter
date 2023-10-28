@@ -173,8 +173,11 @@
 	}
 	
 	
-?>
-<p><a href="<?php echo PLX_ROOT ?>core/admin/plugin.php?p=MyNewsLetter" style="float:inline-end" title="<?php $plxPlugin->lang('L_GOTO_ADMIN') ?>"><?php $plxPlugin->lang('L_ADMIN') ?></a></p>
+?><div id="topAdmin">
+	<!-- lien retour vers l'admin des plugins -->
+	<a class="back" href="parametres_plugins.php" ><?= L_BACK_TO_PLUGINS ?></a>
+	
+<p style="text-align:right;text-align:inline-end;margin-inline-end:1em;"><!-- --> <a href="<?php echo PLX_ROOT ?>core/admin/plugin.php?p=MyNewsLetter" title="<?php $plxPlugin->lang('L_GOTO_ADMIN') ?>"><?php $plxPlugin->lang('L_ADMIN') ?></a></p>
 <h3><?php $plxPlugin->lang('L_CONFIG') ?></h3>
 <div id="onglets">
 	<form  id="form_MyNewsLetter" action="parametres_plugin.php?p=MyNewsLetter" method="post" class="config">
@@ -341,6 +344,7 @@
 		</p>
 	</form>
 </div>
+</div>
 <!-- tinymce -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.4.2/tinymce.min.js" integrity="sha512-sWydClczl0KPyMWlARx1JaxJo2upoMYb9oh5IHwudGfICJ/8qaCyqhNTP5aa9Xx0aCRBwh71eZchgz0a4unoyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.4.2/icons/default/icons.min.js" integrity="sha512-iZEjj5ZEdiNAMLCFKlXVZkE0rKZ9xRGFtr0aMi8gxbEl1RbMCbpPomRiKurc93QVFdaxcnduQq6562xxqbC6wQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -353,7 +357,8 @@
 	
 	
 	
-</script>
-<style>.tox-promotion{display:none}/* do not confuse and give funny idea to the user that would bring up an issue to the plugin using it*/</style>
+</script>	<style>
+		.tox-promotion{display:none}/* do not confuse and give funny idea to the user that would bring up an issue to the plugin using it*/
+		</style>
 
 

@@ -223,25 +223,7 @@
 			</div>
 		</form>
 	</div>
-	<style>/* page admin news letter */
-		#topAdmin {
-		position: fixed;
-		inset: 0 0 0 0;
-		background: #ddd;
-		overflow: auto;
-		}
-		.inline-form.action-bar {
-		display: none;
-		}
-		p.in-action-bar {
-		margin: 0;
-		}
-		fieldset, table#suscribers, legend {
-		background: #fff;
-		margin: 0.25em 0;
-		border-radius: 0.25em;
-		box-shadow: 1px 1px 3px #3334;
-		} 
+	<style>
 		
 	</style>
 	<!-- tinymce -->
