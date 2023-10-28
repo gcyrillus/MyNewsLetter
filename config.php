@@ -127,35 +127,37 @@
 	if(!$plxPlugin->subscriptions) $plxPlugin->subscriptions=' Plugin jamais activé - aucun numéro attribué';
 
 	
-	$var['mnuName'] =  $plxPlugin->getParam('mnuName'	)	=='' ? $plxPlugin->getLang('L_DEFAULT_MENU_NAME') 				: $plxPlugin->getParam('mnuName');
-	$var['placeholder'] = $plxPlugin->getParam('placeholder')	=='' ? ''									: $plxPlugin->getParam('placeholder');
-	$var['frmLibButton'] =  $plxPlugin->getParam('frmLibButton')	=='' ? $plxPlugin->getLang('L_FORM_BUTTON') 					: $plxPlugin->getParam('frmLibButton');
-	$var['frmDisplay'] =  $plxPlugin->getParam('frmDisplay')	=='' ? 1 									: $plxPlugin->getParam('frmDisplay');
-	$var['mnuDisplay'] =  $plxPlugin->getParam('mnuDisplay')	=='' ? 1 									: $plxPlugin->getParam('mnuDisplay');
-	$var['mnuPos'] =  $plxPlugin->getParam('mnuPos')		=='' ? 2 									: $plxPlugin->getParam('mnuPos');
-	$var['template'] = $plxPlugin->getParam('template')		=='' ? 'static.php' 								: $plxPlugin->getParam('template');
-	$var['frequency'] = $plxPlugin->getParam('frequency')		=='' ? '3' 									: $plxPlugin->getParam('frequency');
-	$var['url'] = $plxPlugin->getParam('url')			=='' ? 'NewsLetter' 								: $plxPlugin->getParam('url');
-	$var['method'] =  $plxPlugin->getParam('method')		=='' ? 'post' 									: $plxPlugin->getParam('method');
-	$var['day1'] = $plxPlugin->getParam('day1')			=='' ? '1' 									: $plxPlugin->getParam('day1');
-	$var['day2'] = $plxPlugin->getParam('day2')			=='' ? '7' 									: $plxPlugin->getParam('day2');
-	$var['hour1'] = $plxPlugin->getParam('hour1')			=='' ? '08' 									: $plxPlugin->getParam('hour1');
-	$var['hour2'] = $plxPlugin->getParam('hour1')			=='' ? '20'									: $plxPlugin->getParam('hour2');
-	$var['paramSend'] = $plxPlugin->getParam('paramSend')		=='' ? '2'									: $plxPlugin->getParam('paramSend');
-	$var['lots'] = $plxPlugin->getParam('lots')			=='' ? '5'									: $plxPlugin->getParam('lots');
-	$var['from'] = $plxPlugin->getParam('from')			=='' ? $plxPlugin->get_domain() 						: $plxPlugin->getParam('from');
-	$var['who'] = $plxPlugin->getParam('who')			=='' ? $plxAdmin->aUsers['001']['name'] 					: $plxPlugin->getParam('who');
-	$var['object'] = $plxPlugin->getParam('object')			=='' ? '[La NewsLetter de '.$plxAdmin->aConf['title'].' du '. date('m-Y').']' 	: $plxPlugin->getParam('object');
-	$var['mention'] = $plxPlugin->getParam('mention')		=='' ? 1 									: $plxPlugin->getParam('mention');
-	$var['footer'] = $plxPlugin->getParam('footer')			=='' ? 1 									: $plxPlugin->getParam('footer');
-	$var['logo'] = $plxPlugin->getParam('logo')			=='' ? 0 									: $plxPlugin->getParam('logo');
-	$var['intro'] = $plxPlugin->getParam('intro')			=='' ? 0 									: $plxPlugin->getParam('intro');
-	$var['posMention'] = $plxPlugin->getParam('posMention')		=='' ? 0 									: $plxPlugin->getParam('posMention');
-	$var['lastart'] = $plxPlugin->getParam('lastart')		=='' ? 1 									: $plxPlugin->getParam('lastart');
-	$var['content_intro']= $plxPlugin->getParam('content_intro')	=='' ? $plxPlugin->getLang('L_CONTENT_INTRO')					: $plxPlugin->getParam('content_intro');
-	$var['content_mention']= $plxPlugin->getParam('content_mention')=='' ? $plxPlugin->getLang('L_MENTIONS_HTML')					: $plxPlugin->getParam('content_mention');
-	$var['content_footer'] = $plxPlugin->getParam('content_footer')	=='' ? $plxPlugin->getLang('L_FOOTER_HTML') 					: $plxPlugin->getParam('content_footer');
-	$var['formTitle'] = $plxPlugin->getParam('formTitle')	=='' ? $plxPlugin->getLang('L_FORM_TITLE') 					: $plxPlugin->getParam('formTitle');
+	$var['mnuName'] =  $plxPlugin->getParam('mnuName'	)			=='' ? $plxPlugin->getLang('L_DEFAULT_MENU_NAME') 	: $plxPlugin->getParam('mnuName');
+	$var['placeholder'] = $plxPlugin->getParam('placeholder')		=='' ? ''											: $plxPlugin->getParam('placeholder');
+	$var['frmLibButton'] =  $plxPlugin->getParam('frmLibButton')	=='' ? $plxPlugin->getLang('L_FORM_BUTTON') 		: $plxPlugin->getParam('frmLibButton');
+	$var['frmDisplay'] =  $plxPlugin->getParam('frmDisplay')		=='' ? 1 											: $plxPlugin->getParam('frmDisplay');
+	$var['mnuDisplay'] =  $plxPlugin->getParam('mnuDisplay')		=='' ? 1 											: $plxPlugin->getParam('mnuDisplay');
+	$var['mnuPos'] =  $plxPlugin->getParam('mnuPos')				=='' ? 2 											: $plxPlugin->getParam('mnuPos');
+	$var['template'] = $plxPlugin->getParam('template')				=='' ? 'static.php' 								: $plxPlugin->getParam('template');
+	$var['newsfrequency'] = $plxPlugin->getParam('newsfrequency')	=='' ? '1' 											: $plxPlugin->getParam('newsfrequency');
+	$var['frequency'] = $plxPlugin->getParam('frequency')			=='' ? '3' 											: $plxPlugin->getParam('frequency');
+	$var['url'] = $plxPlugin->getParam('url')						=='' ? 'NewsLetter' 								: $plxPlugin->getParam('url');
+	$var['method'] =  $plxPlugin->getParam('method')				=='' ? 'post' 										: $plxPlugin->getParam('method');
+	$var['day1'] = $plxPlugin->getParam('day1')						=='' ? '1' 											: $plxPlugin->getParam('day1');
+	$var['day2'] = $plxPlugin->getParam('day2')						=='' ? '7' 											: $plxPlugin->getParam('day2');
+	$var['hour1'] = $plxPlugin->getParam('hour1')					=='' ? '08' 										: $plxPlugin->getParam('hour1');
+	$var['hour2'] = $plxPlugin->getParam('hour1')					=='' ? '20'											: $plxPlugin->getParam('hour2');
+	$var['paramSend'] = $plxPlugin->getParam('paramSend')			=='' ? '2'											: $plxPlugin->getParam('paramSend');
+	$var['lots'] = $plxPlugin->getParam('lots')						=='' ? '5'											: $plxPlugin->getParam('lots');
+	$var['from'] = $plxPlugin->getParam('from')						=='' ? $plxPlugin->get_domain() 					: $plxPlugin->getParam('from');
+	$var['who'] = $plxPlugin->getParam('who')						=='' ? $plxAdmin->aUsers['001']['name'] 			: $plxPlugin->getParam('who');
+	$var['object'] = $plxPlugin->getParam('object')					=='' ? '['.$plxPlugin->getLang('L_NEWS_FROM').$plxAdmin->aConf['title'].' | '. date('m-Y').']' 	
+																														: $plxPlugin->getParam('object');
+	$var['mention'] = $plxPlugin->getParam('mention')				=='' ? 1 											: $plxPlugin->getParam('mention');
+	$var['footer'] = $plxPlugin->getParam('footer')					=='' ? 1 											: $plxPlugin->getParam('footer');
+	$var['logo'] = $plxPlugin->getParam('logo')						=='' ? 0 											: $plxPlugin->getParam('logo');
+	$var['intro'] = $plxPlugin->getParam('intro')					=='' ? 0 											: $plxPlugin->getParam('intro');
+	$var['posMention'] = $plxPlugin->getParam('posMention')			=='' ? 0 											: $plxPlugin->getParam('posMention');
+	$var['lastart'] = $plxPlugin->getParam('lastart')				=='' ? 1 											: $plxPlugin->getParam('lastart');
+	$var['content_intro']= $plxPlugin->getParam('content_intro')	=='' ? $plxPlugin->getLang('L_CONTENT_INTRO')		: $plxPlugin->getParam('content_intro');
+	$var['content_mention']= $plxPlugin->getParam('content_mention')=='' ? $plxPlugin->getLang('L_MENTIONS_HTML')		: $plxPlugin->getParam('content_mention');
+	$var['content_footer'] = $plxPlugin->getParam('content_footer')	=='' ? $plxPlugin->getLang('L_FOOTER_HTML') 		: $plxPlugin->getParam('content_footer');
+	$var['formTitle'] = $plxPlugin->getParam('formTitle')			=='' ? $plxPlugin->getLang('L_FORM_TITLE') 			: $plxPlugin->getParam('formTitle');
 	
 	
 	
@@ -353,3 +355,5 @@
 	
 </script>
 <style>.tox-promotion{display:none}/* do not confuse and give funny idea to the user that would bring up an issue to the plugin using it*/</style>
+
+

@@ -8,6 +8,12 @@
   max-width: 90%;
   margin:1em auto;
 }
+aside .NewsLettertitle {
+  margin: 0.25em 0;
+}
+.NewsLettertitle:empty {
+  display: none;
+}
 .newsform div.newsL p {
   display: flex;
   text-align: center;
@@ -21,4 +27,19 @@
   font-size: 1.5em;
   line-height: .25em;
   vertical-align: -.15em;
+}
+.subscribOption {
+  flex-wrap:wrap;
+}
+.subscribOption .fullwidth {
+  min-width: 70%;
+  display: none;
+  margin: auto;
+}
+#valid:checked + span {
+  display: block;
+}
+label[for="valid"] {
+  max-width: 80%;
+  line-height: 1;
 }

@@ -1,36 +1,36 @@
 <?php
     $LANG = array(
-    'L_PAGE_TITLE'		=> 'NewsLetter',
-    'L_PAGE_ADMIN_TITLE'	=> 'Administration du plugin "NewsLetter"',
+    'L_PAGE_TITLE'				=> 'NewsLetter',
+    'L_PAGE_ADMIN_TITLE'		=> 'Administration du plugin "NewsLetter"',
     'L_BACK_TO_ADMINISTRATION'  => 'Retour à l\'administration',
     'L_THERE_IS_NEWS_TO_SEND'   => 'il y a des nouvelles à envoyer depuis %s',
     'L_NEVER'                   => 'Jamais',
     
     # config.php
-    'L_CONFIG'			=> 'Page de Configuration',
+    'L_CONFIG'					=> 'Page de Configuration',
     'L_GOTO_ADMIN'              => 'Allez à la page administration',
     'L_ASK_CONFIRM'             => 'Validation Abonnements',
     'L_REQUIRE_CONFIRM'         => 'Envoyer un mail avec un lien de validation.',
-    'L_CONFIG_STATIC'		=> 'Affichage Visiteurs',
-    'L_CONFIG_MENU'		=> 'Affichage au menu',
-    'L_CONFIG_NEWS'		=> 'Réglages des envois',
-    'L_CONFIG_SHOW'		=> 'Options d\'affichage',
-    'L_PARAM_WHEN'		=> 'Heures et jours d\'envois',
-    'L_PARAM_AUTO'		=> 'Configuration envois',
+    'L_CONFIG_STATIC'			=> 'Affichage Visiteurs',
+    'L_CONFIG_MENU'				=> 'Affichage au menu',
+    'L_CONFIG_NEWS'				=> 'Réglages des envois',
+    'L_CONFIG_SHOW'				=> 'Options d\'affichage',
+    'L_PARAM_WHEN'				=> 'Heures et jours d\'envois',
+    'L_PARAM_AUTO'				=> 'Configuration envois',
     'L_BATCH_SENDINGS'          => 'Envois NewsLetter par lots de',
     'L_FREQUENCE'               => 'Periodicité',
-    'L_AUTO_SENDING'		=> 'Envois automatiques.', 
-    'L_AUTO_BLIND'		=> 'Envois automatiques a l\'aveugle si nouvelles publications.', 
-    'L_AUTO_PRE_CONF'		=> 'Envois automatiques avec l\'introduction par défaut.',
-    'L_AUTO_NOTIFY'		=> 'Prévenir le Webmestre d\'une nouvelle potentielle.',
-    'L_PARAM_DAY_1_2'		=> 'Envoi entre ',
-    'L_PARAM_DAY'		=> ' le jour de la semaine n°',
-    'L_PARAM_HOUR_1_2'		=> 'Envoi entre',
-    'L_AND'			=> ' et ',
-    'L_START'			=> ' début',
-    'L_END'			=> ' fin',
-    'L_LANG_UNAVAILABLE'	=> 'Langue non disponible : %s',
-    'L_MAIN'			=> 'Général',
+    'L_AUTO_SENDING'			=> 'Envois automatiques.', 
+    'L_AUTO_BLIND'				=> 'Envois automatiques a l\'aveugle si nouvelles publications.', 
+    'L_AUTO_PRE_CONF'			=> 'Envois automatiques avec l\'introduction par défaut.',
+    'L_AUTO_NOTIFY'				=> 'Prévenir le Webmestre d\'une nouvelle potentielle.',
+    'L_PARAM_DAY_1_2'			=> 'Envoi entre ',
+    'L_PARAM_DAY'				=> ' le jour de la semaine n°',
+    'L_PARAM_HOUR_1_2'			=> 'Envoi entre',
+    'L_AND'						=> ' et ',
+    'L_START'					=> ' début',
+    'L_END'						=> ' fin',
+    'L_LANG_UNAVAILABLE'		=> 'Langue non disponible : %s',
+    'L_MAIN'					=> 'Général',
     'L_NAME_SENDER'             => 'Nom de l\'expéditeur',
     'L_OBJECT'                  => 'Objet',
     'L_MAIL_OBJECT'             => 'Objet du courriel',
@@ -38,21 +38,21 @@
     'L_SEND'                    => ' Envoyer',
     'L_COMMIT_SEND'             => 'Valider l\'envoi',
     'L_SEND_VALID'              => 'Envoi validé',
-    'L_DEFAULT_MENU_NAME'	=> 'NewsLetter',
-    'L_MENU_DISPLAY'		=> 'Afficher au menu la page "NewsLetter"',
-    'L_FORM_DISPLAY'		=> 'Afficher le formulaire d\'inscription sur la page "NewsLetter"',
-    'L_MENU_TITLE' 		=> 'Titre du menu',
-    'L_MENU_POS'		=> 'Position du menu',
+    'L_DEFAULT_MENU_NAME'		=> 'NewsLetter',
+    'L_MENU_DISPLAY'			=> 'Afficher au menu la page "NewsLetter"',
+    'L_FORM_DISPLAY'			=> 'Afficher le formulaire d\'inscription sur la page "NewsLetter"',
+    'L_MENU_TITLE'		    	=> 'Titre du menu',
+    'L_MENU_POS'		    	=> 'Position du menu',
     'L_COMPOSITION'             => 'Composition',
     'L_SITE_LOGO'               => 'Logo du site',
     'L_INSERT_LOGO'             => 'inserer le logo (modifiable en édition)',
     'L_PERMANENT_ELEMENT'       => 'Edition élèments permanents',
     'L_INTRO'                   => ' Textes intro personnalisée',
     'L_CONTENT_INTRO'           => '<h1 style="font-size:24px;margin:0 20px 1em;font-family:Arial,sans-serif;">INTRO TITLLE</h1>
-												<p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Editer ce paragraphe.</p>
-												<p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="http://www.example.com" style="color:#ee4c50;text-decoration:underline;">exemple de lien</a></p>',
-    'L_TEMPLATE'		=> 'Template',
-    'L_PARAM_URL'		=> 'Nom du paramètre dans l\'url',
+    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Editer ce paragraphe.</p>
+    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="http://www.example.com" style="color:#ee4c50;text-decoration:underline;">exemple de lien</a></p>',
+    'L_TEMPLATE'				=> 'Template',
+    'L_PARAM_URL'				=> 'Nom du paramètre dans l\'url',
     'L_ELEMENTS'                => 'Elèments',
     'L_MENTION'                 => 'Mention ',
     'L_MENTIONS'                => 'Mentions ',
@@ -66,34 +66,35 @@
     'L_FOOTER'                  => 'Pied ',
     'L_FOOTER_HTML'             => '<table style="width: 100%; border-collapse: collapse; border: 0px none; border-spacing: 0px; "role="presentation">
 	<tbody>
-		<tr>
-			<td style="padding: 0px; width: 50%; text-align: center;" align="left">
-				<p style="margin: 0; font-size: 14px; line-height: 16px; font-family: Arial,sans-serif;">&reg; 2023<br> ###STOP###</p>
-			</td>
-			<td style="padding: 0px; width: 50%; text-align: center; height: 72.25px;">
-				<p><a href="https:pluxpolis.net" target="_blank" rel="noopener"><img style="border-radius: 50%; background: yellow;" src="https://gcyrillus.alwaysdata.net/devPlugin/data/medias/news/socialPNG/bb.png" alt="Ressources pour pluxml" width="40"></a></p>
-			</td>
-		</tr>
-		<tr>
-			<td style="padding: 0px; text-align: center; " colspan="2">
-				<p style="margin: 0;">&nbsp;</p>
-				<nav>###CATEGORIE###</nav>
-			</td>
-		</tr>
+    <tr>
+    <td style="padding: 0px; width: 50%; text-align: center;" align="left">
+    <p style="margin: 0; font-size: 14px; line-height: 16px; font-family: Arial,sans-serif;">&reg; 2023<br> ###STOP###</p>
+    </td>
+    <td style="padding: 0px; width: 50%; text-align: center; height: 72.25px;">
+    <p><a href="https:pluxpolis.net" target="_blank" rel="noopener"><img style="border-radius: 50%; background: yellow;" src="https://gcyrillus.alwaysdata.net/devPlugin/data/medias/news/socialPNG/bb.png" alt="Ressources pour pluxml" width="40"></a></p>
+    </td>
+    </tr>
+    <tr>
+    <td style="padding: 0px; text-align: center; " colspan="2">
+    <p style="margin: 0;">&nbsp;</p>
+    <nav>###CATEGORIE###</nav>
+    </td>
+    </tr>
 	</tbody>
-</table',
+    </table',
     'L_INTRO_DISPLAY'           => 'Afficher l\'intro personnalisée',
     'L_LASTART'                 => 'Derniers articles',
     'L_ADD_LASTART'             => 'Ajouter les derniers articles',
-    'L_SAVE'			=> 'Enregistrer',
-    'L_HELP'			=> 'Code à ajouter dans le thème pour afficher le formulaire d\'inscription',
-    'L_MENU_LIB_BUTTON'		=> 'Libellé du bouton d\'abonement à la "NewsLetter"',
-    'L_NO_DATA'			=> 'Aucun abonné',
-    'L_SUBSCRIPTION'		=> 'Inscriptions',
-    'L_SUBSCRIPTION_COUNT'	=> 'Nombre',
-    'L_PLACEHOLDER'		=> 'Texte affiché dans le champ d\'inscription (placeholder)',
-    'L_METHOD'           	=> 'Méthode de traitement du formulaire',
+    'L_SAVE'					=> 'Enregistrer',
+    'L_HELP'					=> 'Code à ajouter dans le thème pour afficher le formulaire d\'inscription',
+    'L_MENU_LIB_BUTTON'			=> 'Libellé du bouton d\'abonement à la "NewsLetter"',
+    'L_NO_DATA'					=> 'Aucun abonné',
+    'L_SUBSCRIPTION'			=> 'Inscriptions',
+    'L_SUBSCRIPTION_COUNT'		=> 'Nombre',
+    'L_PLACEHOLDER'				=> 'Texte affiché dans le champ d\'inscription (placeholder)',
+    'L_METHOD'           		=> 'Méthode de traitement du formulaire',
     'L_INVALID_MAIL'            =>' <div class="msg"><p>Adresse mail non valide.</p><p>Une adresse ne peut avoir d\'espace et doit correspondre à un nom de domaine</p><p>Corrigez l\'adresse ou utilisez en une autre.</p></div>',
+    'L_RETRY_VALID_MAIL'            =>' adresse mail invalide ou déjà utilisée.\\n Refusée.\\n Réessayer avec une adresse valide.',
     
     # Admin
     'L_ADMIN'                   => 'Administration',
@@ -122,18 +123,24 @@
     'L_HELP_DATE_STOP'          => '<small>###DATE### insére la date d\'abonement du récipient. <br> ###STOP### son lien de désabonnement personnel.<br> ###CATEGORIE### insére les liens vers les catègories du site.</small> ',
     'L_COMMIT_CHANGE'           => 'Valider les modifications',
     'L_CANCEL_ALL'              => 'Annuler tout',
+    'L_ERROR_DEL_SUB'           => 'Erreur, effacement impossible. Abonnement inconnu',
+    'L_DELETE'                  => 'Effacer',
+    'L_DELETED'                 => 'Effacé!',
+    'L_UNKNOWN'                 => 'Inconnu',
+    'L_ADD_SUBSCRIBER'          => 'Ajouter un abonné',
     
     # form.plxMyNewsLetter.php
     'L_CONFIG_MAIL_NEWS'        => ' Courriel des News',
     'L_NEWS_LETTER'             => ' à la newsletter',
+    'L_NEWS_FROM'               => 'La newsLetter de ',
     'L_CHECK_MAIL_ADDRESS'      => ' Vérifier et enregistrer le courriel à utiliser.',
     'L_CONFIG_MAIL_ADDRESS'     => ' Adresse mail à utiliser dans les courriels',
     'L_TITLE_FORM'              => ' Titre du formulaire',
-    'L_FORM_TITLE'		=> ' Abonnement "NewsLetter"',
-    'L_SUBSCRIBE_OPTION'	=> ' Abonnez-moi à la "NewsLetter". &nbsp;',
-    'L_FORM_BUTTON'		=> ' Ok',
+    'L_FORM_TITLE'				=> ' Abonnement "NewsLetter"',
+    'L_SUBSCRIBE_OPTION'		=> ' Abonnez-moi à la "NewsLetter". &nbsp;',
+    'L_FORM_BUTTON'				=> ' Ok',
     'L_AUTHORIZE_MAIL'          => 'J\'accepte de recevoir la NewsLetter.',
-    'L_UNSUBSCRIB'		=> ' &Agrave Bientôt,<br><br>,Nous vous remercions d\'avoir été abonné à notre newsletter.<br>Nous espérons que nos contenus vous ont été utiles.<br>Cordialement,<br>',
+    'L_UNSUBSCRIB'				=> ' &Agrave Bientôt,<br><br>,Nous vous remercions d\'avoir été abonné à notre newsletter.<br>Nous espérons que nos contenus vous ont été utiles.<br>Cordialement,<br>',
     'L_SUBSCRIPTION_REGISTERED' => '    Votre inscription à la NewsLetter est enregistrée.',
     'L_SUBSCRIPTION_NOT_FOUND'	=> ' Bonjour, Il n\'y a pas ou plus d\'abonnement associé à ce lien de désabonnement!',
     'L_SUBSCRIPTION_FOUND'      => '<div class="msg">
@@ -222,4 +229,3 @@
     'L_DATE_MONTH_SHORT'		=> array('janv','févr',' mars','avril','mai','juin','juil','août','sept','oct','nov','déc'),
     'L_DATE_MONTH_LONG'		    => array('janvier','février',' mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'),
     );
-?>

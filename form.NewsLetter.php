@@ -22,6 +22,9 @@
 	#traitement formulaire si envoi
 	if(!empty($method['courriel'])) {
 		$blabla='';
+		if($method['newsfrequency']=='1') $ab =$plxPlugin->getLang('L_MONTHLY');
+		if($method['newsfrequency']=='3') $ab =$plxPlugin->getLang('L_QUATERLY');
+		if($method['newsfrequency']=='6') $ab =$plxPlugin->getLang('L_BI_ANNUAL');		
 	# enregistrement des abonnements
 		# Maj du fichier des abonnés
 		$plxPlugin->updateJson();

@@ -3,7 +3,7 @@
 		* Plugin 	MyNewsLetter
 		* @author	Cyrille G.
 		* https://github.com/gcyrillus/MyNewsLetter
-  		* update 24/10/2023
+		* update 24/10/2023
 	**/
 	class MyNewsLetter extends plxPlugin {
 		
@@ -152,6 +152,7 @@
 					} else {
 					file_put_contents($initFile, $file_content);
 				}
+				chmod($initFile, 0600);
 				#création du repertoire dans le plugin
 				mkdir(PLX_PLUGINS.basename(__DIR__)."/".$subscriptionDir, 0775);	
 				touch(PLX_PLUGINS.basename(__DIR__)."/".$subscriptionDir."/index.html");
@@ -290,19 +291,22 @@
 			* @return	stdio
 			* @author	Stephane F
 		**/
-		public static function form($title=false) {
+		public static function form($title=false ) {
 			
 			$placeholder = '';
 			$courriel ='';
 			
 			# récupération d'une instance de plxMotor
 			$plxMotor = plxMotor::getInstance();
-			$plxPlugin = $plxMotor->plxPlugins->getInstance('MyNewsLetter');
+			$plxPlugin = $plxMotor->plxPlugins->getInstance('MyNewsLetter'); 
 			$method = $plxPlugin->getParam('method') == 'get' ? $_GET : $_POST;
 			$frmMethod = $plxPlugin->getParam('method') == 'get' ? 'get' : 'post';
-			
+			$newsfrequency = $plxPlugin->getParam('newsfrequency') =='' ? '1': $plxPlugin->getParam('newsfrequency');
+
 			if(is_string($title)) {$formtitle = $title	==' ' ? $plxPlugin->getLang('L_FORM_TITLE'): $title;}
 			else {$formtitle = $plxPlugin->getParam('formTitle')	=='' ? $plxPlugin->getLang('L_FORM_TITLE'): $plxPlugin->getParam('formTitle');}
+
+			
 			
 			if(!empty($method['courriel'])) {
 				$courriel = plxUtils::strCheck(plxUtils::unSlash($method['courriel']));
@@ -324,6 +328,10 @@
 					</p>
 					<p class="subscribOption">
 						<label for="valid"><?php $plxPlugin->lang('L_AUTHORIZE_MAIL') ?></label><input type="checkbox" name="valid" id="valid" value="1">
+						<span class="fullwidth">
+						<label for="newsfrequency"><?php $plxPlugin->lang('L_FREQUENCE') ?></label>
+						<?php plxUtils::printSelect('newsfrequency',array('1'=>$plxPlugin->getLang('L_MONTHLY'),'3'=>$plxPlugin->getLang('L_QUATERLY'), '6'=>$plxPlugin->getLang('L_BI_ANNUAL')),$newsfrequency); ?>
+						</span>
 					</p>
 				</div>
 			</form>
@@ -373,7 +381,7 @@
 					$plxMotor = plxMotor::getInstance();
 					
 					$mail=base64_encode($email.$this->subscriptions);
-					
+					$newsfrequence= (int)$method['newsfrequency'];
 					$date=date("m-Y"); 					
 					$lastSent=$date;
 					# valeur lien de désabonnement
@@ -396,7 +404,8 @@
 						# stats abonnement
 						$newSubscription= key($datasSubscriptions)+ 1;
 						# ajout abonnement
-						$datasSubscriptions[$newSubscription]= array('email'=> $mail , 'dateSub'=> $date, 'lastSent'=> $lastSent, 'revoque' => $revoque, 'valid'=> $valid , 'agent'=> $_SERVER ['HTTP_USER_AGENT'] , 'referent'=>   $_SERVER['HTTP_REFERER']  , 'ip'=>$_SERVER ['REMOTE_ADDR'] );
+						$_SERVER['HTTP_REFERER'] = $_SERVER['HTTP_REFERER'] =='' ? 'admin' :$_SERVER['HTTP_REFERER'];
+						$datasSubscriptions[$newSubscription]= array('email'=> $mail , 'dateSub'=> $date, 'lastSent'=> $lastSent, 'revoque' => $revoque, 'valid'=> $valid , 'agent'=> $_SERVER ['HTTP_USER_AGENT'] , 'referent'=>   $_SERVER['HTTP_REFERER']  , 'ip'=>$_SERVER ['REMOTE_ADDR'], 'frequence' => $newsfrequence );
 					}
 					else { // premier abonement
 						$datasSubscriptions[]= array('email'=> $mail , 'dateSub'=> $date, 'lastSent'=> $lastSent, 'revoque' => $revoque, 'valid'=> $valid);	
@@ -415,7 +424,7 @@
 						$subcs = $this->getLang('L_NEWS_LETTER');
 						$validate = $plxMotor->urlRewrite('?'.$this->getParam('url').'&validNewsLetter='.$revoque);
 						$cancel   = $plxMotor->urlRewrite('?'.$this->getParam('url').'&stopNewsLetter='.$revoque);
-						$body	  = sprintf($this->getLang('L_SUBSCRIPTION_AUTO'), $email, $subcs, $cancel ,$plxMotor->aUsers['001']['name'], $plxMotor->aConf['title']);
+						$body	  = sprintf($this->getLang('L_SUBSCRIPTION_AUTO'), $email, $cancel, $cancel ,$plxMotor->aUsers['001']['name'], $plxMotor->aConf['title']);
 						
 						$this->envoiCourriel($plxMotor->aUsers['001']['name'], $this->from, $email, 'Confirmation de votre abonnement à la newsLetter' , $body, $contentType="html", $cc=false, $bcc=false);
 						$recap = sprintf($this->getLang('L_SUBSCRIPTION_ACTIVE'), $subcs, $email ,  $cancel);
@@ -562,6 +571,18 @@
 			}
 		}
 		
+		/**
+			* Méthode qui ajoute un abonné au  fichier json 
+			* Methode appeler depuis la page d'administration
+			* @author	Cyrille G.
+		**/	
+		public function addSubscriber(){
+			$this->setParam('method','get','string');
+			if(isset($_GET['addSubscriber'])) {				
+				$this->updateJson();
+			}
+		}		
+		
 		/* verifie le nom de domain et retourne le domain principale
 			* reconstruit une adresse mail à partir du nom de domaine principale
 			* précedé de newsletter ou du sous domaine
@@ -585,7 +606,47 @@
 			}
 			return $myhost;
 		}
-		
+		public function getsubscribers() {
+				$datasSubscriptions = json_decode(file_get_contents(PLX_ROOT.'plugins/'.__CLASS__.'/'.$this->subscriptions.'/'.$this->subscriptions.'.json'), true);
+# y a t-il des abonnements, 
+				if(is_array($datasSubscriptions) AND count($datasSubscriptions) > 0) { //si oui on continue, il y a au moins un abonné
+							echo "
+							<script>
+							const L_RETRY_VALID_MAIL =\"".$this->getLang('L_RETRY_VALID_MAIL')."\";
+							const ERROR_MESSAGE =\"".$this->getLang('L_SUBSCRIPTION_NOT_FOUND')."\";
+							const L_DELETED = '".$this->getLang('L_DELETED')."';
+							const L_ERROR_DEL_SUB = '".$this->getLang('L_ERROR_DEL_SUB')."';
+							const L_UNKNOWN ='".$this->getLang('L_UNKNOWN')."';
+							const NEWSMAIL = '".$this->getParam('from')."';
+							const TODAY ='".date('m-Y')."';
+							const L_NONE1 ='". L_NONE1 ."';
+							</script>
+							";
+							# parcours des abonnements 
+							$datas ='<table id="suscribers">
+							<thead>
+								<tr><th>Courriel</th><th>valide</th><th>Date subscription</th><th>Last mail</th><th>frequence</th><th>groupe</th><th></th>
+								</tr>
+							</thead>
+							<tbody>
+							';
+							foreach($datasSubscriptions as $records =>$v) {
+							$courriel = str_replace($this->subscriptions, '',base64_decode( $v['email']));
+							$valid= $v['valid'] =='0' ?  L_NO : L_YES;
+							$dateSub =$v['dateSub'];
+							$lastSent= $v['lastSent'];
+							$frequence= !isset($v['frequence']) ? '?' : $v['frequence'] ;
+							$group = !isset($v['group']) ? L_NONE1 : $v['group'];
+							$datas .='	<tr><th>'.$courriel.'</th><td>'.$valid.'</td><td>'.$dateSub.'</td><td>'.$lastSent.'</td><td>'.$frequence.'</td><td>'.$group.'</td><td><a  data-revoque=\''.$v['revoque'].'\'>'.$this->getLang('L_DELETE').'</a></th></tr>'.PHP_EOL;
+							
+							}
+							$datas .='</tbody>
+							<tfoot><tr><td><input id="courriel"></td><td>'.$valid.'</td><td>'.date('m-Y').'</td><td>01-2023</td><td>1</td><td></td><td><a id="add">'.$this->getLang('L_ADD_SUBSCRIBER').'</a></td></tr>
+							</table>';
+							echo $datas;
+				
+				}
+		}
 		/**
 			* Tests en entonnoir avant de validé l'envoi des news:
 			*
